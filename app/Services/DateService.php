@@ -13,6 +13,8 @@ class DateService
         while (self::isWeekend($carbonDate)) {
             // $carbonDate->addDay();
             $carbonDate->subDay();
+
+            //
         }
 
         while (self::isPublicHoliday($carbonDate)) {
