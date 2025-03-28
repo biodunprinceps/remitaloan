@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('loans', function (Blueprint $table) {
             $table->id();
+            $table->string('title')->nullable();
+            $table->string('contactphone')->nullable();
+            $table->string('city')->nullable();
+            $table->string('state')->nullable();
+            $table->string('bvn')->nullable();
+            $table->string('nin')->nullable();
+            $table->string('giroreference')->nullable();
+            $table->string('loan_reason')->nullable();
+            $table->string('status')->default('NEW');
             $table->string('firstname')->nullable();
             $table->string('lastname')->nullable();
             $table->string('email')->nullable();
