@@ -22,6 +22,7 @@ Route::withoutMiddleware('web')->prefix('api')->group(function () {
         Route::post('viewOneLoan', [LoanController::class, 'viewOneLoan']);
         Route::post('listLoans', [LoanController::class, 'listLoans']);
         Route::post('changeStatus', [LoanController::class, 'changeStatus']);
+        Route::post('loanCalculator', [LoanController::class, 'loanCalculator']);
     });
 
 

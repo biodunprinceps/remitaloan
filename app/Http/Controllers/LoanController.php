@@ -70,4 +70,23 @@ class LoanController extends Controller
         $loan->save();
         return response(['status' => 'success', 'message' => 'Loan status updated', 'loan' => $loan], 200);
     }
+
+    public function loanCalculator(Request $request)
+    {
+        $request->validate([
+            'loan_amount' => 'required|numeric|min:1',
+            'tenor' => 'required|integer|min:1',
+            'rate_per_day' => 'nullable|numeric|min:0',
+            'startdate' => 'nullable|date',
+        ]);
+
+        $loan_amount = $request->input('loan_amount');
+        $tenor = $request->input('tenor');
+        $rate_per_day = $request->input('rate_per_day', 0.0025);
+        $startdate = $request->input('startdate',date('Y-m-d'));
+
+        $result = UtilitiesService::loanCalculator($loan_amount, $tenor, $rate_per_day, $startdate);
+
+        return response()->json($result);
+    }
 }
