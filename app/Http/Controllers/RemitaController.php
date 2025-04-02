@@ -8,6 +8,7 @@ use App\Services\DateService;
 use App\Models\RemitaDeduction;
 use App\Services\RemitaService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Http;
 use App\Http\Requests\SetupDeductionRequest;
 use App\Http\Requests\CheckRemitaDataReferencingTelephoneRequest;
 use App\Http\Requests\CheckRemitaDataReferencingAccountDetailsRequest;
@@ -94,4 +95,18 @@ class RemitaController extends Controller
         }
     }
 
+    public function listBanks()
+    {
+        $response = Http::withHeaders([
+            'Authorization' => 'Bearer sk_live_efd68a918240c9547f01cca56c26929ab4038cfc',
+        ])->get('https://api.paystack.co/bank');
+
+        // Check if request was successful
+        if ($response->failed()) {
+            return response()->json(['status' => 'error', 'message' => 'Failed to fetch banks'], 500);
+        }
+
+        // Return bank list
+        return response()->json($response->json(), 200);
+    }
 }

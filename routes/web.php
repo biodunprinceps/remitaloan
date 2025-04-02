@@ -32,7 +32,7 @@ Route::withoutMiddleware('web')->prefix('api')->group(function () {
     });
 
 
-    
+    Route::get('listBanks', [RemitaController::class, 'listBanks']);
     
     Route::post('setupDeduction', [RemitaController::class, 'setupDeduction']);
 });
