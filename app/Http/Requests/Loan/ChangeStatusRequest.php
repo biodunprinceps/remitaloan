@@ -32,9 +32,13 @@ class ChangeStatusRequest extends FormRequest
   protected function failedValidation(Validator $validator)
   {
 
+    $message = '';
+    foreach ($validator->errors()->all() as $error) {
+      $message .= "$error <br> ";
+    }
     $response = response()->json([
       'status' => 'error',
-      'message' => $validator->errors()
+      'message' => $message,
     ], 400);
 
     throw (new ValidationException($validator, $response))
